@@ -7,6 +7,7 @@ module.exports = {
       black: {
         1: "#646681",
         2: "#585858",
+        pure: "#000000",
       },
       bg: {
         1: "#f8f8ff",
@@ -17,7 +18,6 @@ module.exports = {
         1: "#eee",
         2: "#dedfe1",
       },
-      black: "#000000",
       white: "ffffff",
     },
     extend: {},
