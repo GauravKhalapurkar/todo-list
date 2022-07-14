@@ -18,7 +18,7 @@ module.exports = {
         1: "#eee",
         2: "#dedfe1",
       },
-      white: "ffffff",
+      white: "#ffffff",
     },
     extend: {},
   },

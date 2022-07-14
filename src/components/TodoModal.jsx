@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../slices/todoSlice";
+import { v4 as uuid } from "uuid";
+import toast from "react-hot-toast";
 
 const TodoModal = ({ openModal, setOpenModal }) => {
+  const [title, setTitle] = useState("");
+  const [status, setStatus] = useState("incomplete");
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (title && status) {
+      dispatch(
+        addTodo({
+          id: uuid(),
+          title,
+          status,
+          time: new Date().toLocaleString(),
+        })
+      );
+      toast.success("Task Added Successfully!");
+      setOpenModal(false);
+    } else {
+      toast.error("Title shouldn't be empty!");
+    }
+  };
+
   return (
     openModal && (
       <div className="w-[100%] h-[100%] bg-[#00000080] top-0 fixed flex justify-center items-center">
@@ -14,7 +41,10 @@ const TodoModal = ({ openModal, setOpenModal }) => {
           >
             <MdOutlineClose />
           </div>
-          <form className="w-full text-black-1 text-2xl">
+          <form
+            className="w-full text-black-1 text-2xl"
+            onSubmit={(e) => handleSubmit(e)}
+          >
             <h1 className="font-bold">Add Task</h1>
             <div className="flex flex-col py-1">
               <label htmlFor="title" className="text-sm text-black-1 py-2">
@@ -23,7 +53,9 @@ const TodoModal = ({ openModal, setOpenModal }) => {
               <input
                 type="text"
                 id="title"
-                className="p-2 text-sm rounded-md"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="p-2 text-sm bg-white rounded-md"
               />
             </div>
             <div className="flex flex-col py-1">
@@ -33,7 +65,9 @@ const TodoModal = ({ openModal, setOpenModal }) => {
               <select
                 name="status"
                 id="status"
-                className="p-2 text-sm rounded-md"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="p-2 text-sm bg-white rounded-md"
               >
                 <option value="incomplete">Incomplete</option>
                 <option value="complete">Complete</option>
