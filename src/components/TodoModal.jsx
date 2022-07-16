@@ -5,7 +5,7 @@ import { addTodo } from "../slices/todoSlice";
 import { v4 as uuid } from "uuid";
 import toast from "react-hot-toast";
 
-const TodoModal = ({ openModal, setOpenModal }) => {
+const TodoModal = ({ heading, openModal, setOpenModal }) => {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("incomplete");
 
@@ -13,6 +13,12 @@ const TodoModal = ({ openModal, setOpenModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (title === "") {
+      toast.error("Title shouldn't be empty!");
+      return;
+    }
+
     if (title && status) {
       dispatch(
         addTodo({
@@ -24,15 +30,13 @@ const TodoModal = ({ openModal, setOpenModal }) => {
       );
       toast.success("Task Added Successfully!");
       setOpenModal(false);
-    } else {
-      toast.error("Title shouldn't be empty!");
     }
   };
 
   return (
     openModal && (
       <div className="w-[100%] h-[100%] bg-[#00000080] top-0 fixed flex justify-center items-center">
-        <div className="bg-bg-2 w-[90%] max-w-[500px] flex justify-center items-center rounded-md relative p-12 ">
+        <div className="bg-bg-1 border-2 border-bg-3 w-[90%] max-w-[500px] flex justify-center items-center rounded-md relative p-12 ">
           <div
             onClick={() => {
               setOpenModal(false);
@@ -45,7 +49,7 @@ const TodoModal = ({ openModal, setOpenModal }) => {
             className="w-full text-black-1 text-2xl"
             onSubmit={(e) => handleSubmit(e)}
           >
-            <h1 className="font-bold">Add Task</h1>
+            <h1 className="font-bold">{heading} Task</h1>
             <div className="flex flex-col py-1">
               <label htmlFor="title" className="text-sm text-black-1 py-2">
                 Title
@@ -76,16 +80,16 @@ const TodoModal = ({ openModal, setOpenModal }) => {
             <div className="mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 rounded-md bg-primaryPurple text-[#ffffff] font-semibold  text-sm"
+                className="px-4 py-2 rounded-md border-2 border-orange text-orange font-semibold  text-sm"
               >
-                Add Task
+                {heading} Task
               </button>
               <button
                 type="button"
                 onClick={() => {
                   setOpenModal(false);
                 }}
-                className="px-4 py-2 ml-2 rounded-md bg-bg-3 text-sm"
+                className="px-4 py-2 ml-2 rounded-md border-2 border-bg-3 bg-bg-1 text-bg-3 text-sm"
               >
                 Cancel
               </button>

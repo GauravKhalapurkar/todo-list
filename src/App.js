@@ -3,11 +3,13 @@ import AppContent from "./components/AppContent";
 import Header from "./components/Header";
 import PageTitle from "./components/PageTitle";
 import { Toaster } from "react-hot-toast";
+import Background from "./components/Background";
 
 const App = () => {
   return (
     <>
       <div>
+        <Background />
         <PageTitle />
         <Header />
         <AppContent />

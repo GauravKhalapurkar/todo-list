@@ -10,15 +10,16 @@ module.exports = {
         pure: "#000000",
       },
       bg: {
-        1: "#f8f8ff",
-        2: "#ecedf6",
-        3: "#cccdde",
+        1: "#0d1117", //light
+        2: "#010409", //dark
+        3: "#30363d", //border
       },
       gray: {
         1: "#eee",
         2: "#dedfe1",
       },
       white: "#ffffff",
+      orange: "#d29917",
     },
     extend: {},
   },

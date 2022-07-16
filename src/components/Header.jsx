@@ -11,7 +11,7 @@ const Header = () => {
         <button
           type="button"
           onClick={() => setOpenModal(true)}
-          className="px-4 py-2 rounded-md bg-primaryPurple text-[#ffffff] font-semibold  text-sm"
+          className="px-4 py-2 rounded-md border-2 border-orange text-orange font-semibold  text-sm"
         >
           Add Task
         </button>
@@ -21,7 +21,11 @@ const Header = () => {
           <option value="incomplete">Incomplete</option>
         </Spinner>
       </div>
-      <TodoModal openModal={openModal} setOpenModal={setOpenModal} />
+      <TodoModal
+        heading="Add"
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
     </div>
   );
 };
