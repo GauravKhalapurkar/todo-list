@@ -1,15 +1,24 @@
 import { format } from "date-fns/esm";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useDispatch } from "react-redux/es/exports";
-import { deleteTodo } from "../slices/todoSlice";
+import { deleteTodo, updateTodo } from "../slices/todoSlice";
 import toast from "react-hot-toast";
 import TodoModal from "./TodoModal";
+import CheckBox from "./CheckBox";
 
 const TodoItem = ({ todo }) => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
-
+  const [checked, setChecked] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (todo.status === "complete") {
+      setChecked(true);
+    } else {
+      setChecked(false);
+    }
+  }, [todo.status]);
 
   const handleDelete = () => {
     dispatch(deleteTodo(todo.id));
@@ -20,12 +29,19 @@ const TodoItem = ({ todo }) => {
     setUpdateModalOpen(true);
   };
 
+  const handleCheck = () => {
+    setChecked(!checked);
+    dispatch(
+      updateTodo({ ...todo, status: checked ? "incomplete" : "complete" })
+    );
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center px-4 py-2 my-2 bg-bg-2 text-white border-2 border-bg-3 rounded-md ">
-        <div className="flex">
-          []
-          <div className="px-2">
+        <div className="flex w-full">
+          <CheckBox check={checked} handleCheck={handleCheck} />
+          <div className="px-4 flex w-full justify-between">
             <p
               className={
                 todo.status === "complete" && "line-through opacity-70"
