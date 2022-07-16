@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../slices/todoSlice";
+import { addTodo, updateTodo } from "../slices/todoSlice";
 import { v4 as uuid } from "uuid";
 import toast from "react-hot-toast";
 
-const TodoModal = ({ heading, openModal, setOpenModal }) => {
+const TodoModal = ({ heading, openModal, setOpenModal, todo }) => {
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("incomplete");
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (heading === "Update" && todo) {
+      setTitle(todo.title);
+      setStatus(todo.status);
+    } else {
+      setTitle("");
+      setStatus("incomplete");
+    }
+  }, [heading, todo, openModal]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,22 +29,38 @@ const TodoModal = ({ heading, openModal, setOpenModal }) => {
     }
 
     if (title && status) {
-      dispatch(
-        addTodo({
-          id: uuid(),
-          title,
-          status,
-          time: new Date().toLocaleString(),
-        })
-      );
-      toast.success("Task Added Successfully!");
+      if (heading === "Add") {
+        dispatch(
+          addTodo({
+            id: uuid(),
+            title,
+            status,
+            time: new Date().toLocaleString(),
+          })
+        );
+        toast.success("Task Added Successfully!");
+      }
+
+      if (heading === "Update") {
+        if (todo.title !== title || todo.status !== status) {
+          dispatch(
+            updateTodo({
+              ...todo,
+              title,
+              status,
+            })
+          );
+        } else {
+          toast.error("No changes made!");
+        }
+      }
       setOpenModal(false);
     }
   };
 
   return (
     openModal && (
-      <div className="w-[100%] h-[100%] bg-[#00000080] top-0 fixed flex justify-center items-center">
+      <div className="w-full h-full bg-[#00000080] top-0 fixed flex justify-center items-center">
         <div className="bg-bg-1 border-2 border-bg-3 w-[90%] max-w-[500px] flex justify-center items-center rounded-md relative p-12 ">
           <div
             onClick={() => {
@@ -89,7 +114,7 @@ const TodoModal = ({ heading, openModal, setOpenModal }) => {
                 onClick={() => {
                   setOpenModal(false);
                 }}
-                className="px-4 py-2 ml-2 rounded-md border-2 border-bg-3 bg-bg-1 text-bg-3 text-sm"
+                className="px-4 py-2 ml-2 rounded-md border-2 border-bg-3 bg-bg-1 text-white text-sm"
               >
                 Cancel
               </button>

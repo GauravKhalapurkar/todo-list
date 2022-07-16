@@ -22,7 +22,7 @@ const TodoItem = ({ todo }) => {
 
   return (
     <div>
-      <div className="flex justify-between items-center px-4 py-2 my-2 bg-bg-2 text-white border-2 border-bg-3   rounded-md ">
+      <div className="flex justify-between items-center px-4 py-2 my-2 bg-bg-2 text-white border-2 border-bg-3 rounded-md ">
         <div className="flex">
           []
           <div className="px-2">
@@ -51,9 +51,9 @@ const TodoItem = ({ todo }) => {
           </div>
         </div>
       </div>
-
       <TodoModal
         heading="Update"
+        todo={todo}
         openModal={updateModalOpen}
         setOpenModal={setUpdateModalOpen}
       />
