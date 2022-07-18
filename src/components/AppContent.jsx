@@ -19,9 +19,13 @@ const AppContent = () => {
 
   return (
     <div className="max-w-[800px] mx-auto">
-      {filterTodoList.length > 0
-        ? filterTodoList.map((todo) => <TodoItem key={todo.key} todo={todo} />)
-        : "Hurry! No Todos."}
+      {filterTodoList.length > 0 ? (
+        filterTodoList.map((todo) => <TodoItem key={todo.key} todo={todo} />)
+      ) : (
+        <div className="bg-bg-2 px-4 py-4 my-2 rounded-md border-2 border-bg-3 text-white">
+          Hurray! No Todos.
+        </div>
+      )}
     </div>
   );
 };

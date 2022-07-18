@@ -38,7 +38,13 @@ const TodoItem = ({ todo }) => {
 
   return (
     <div>
-      <div className="flex justify-between items-center px-4 py-2 my-2 bg-bg-2 text-white border-2 border-bg-3 rounded-md ">
+      <div
+        className={`flex justify-between items-center px-4 py-2 my-2 bg-bg-2 text-white border-2 border-bg-3 rounded-md ${
+          todo.status === "complete"
+            ? "hover:border-green hover:transition-all"
+            : "hover:border-blue hover:transition-all"
+        }`}
+      >
         <div className="flex w-full">
           <CheckBox check={checked} handleCheck={handleCheck} />
           <div className="px-4 flex w-full justify-between">

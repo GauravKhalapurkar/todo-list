@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button, { Spinner } from "./Button";
+import { Spinner } from "./Button";
 import TodoModal from "../components/TodoModal.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFilterStatus } from "../slices/todoSlice";
@@ -24,9 +24,15 @@ const Header = () => {
           Add Task
         </button>
         <Spinner id="status" value={filterStatus} onChange={updateFilter}>
-          <option value="all">All</option>
-          <option value="complete">Complete</option>
-          <option value="incomplete">Incomplete</option>
+          <option className="text-white" value="all">
+            All
+          </option>
+          <option className="text-white" value="complete">
+            Complete
+          </option>
+          <option className="text-white" value="incomplete">
+            Incomplete
+          </option>
         </Spinner>
       </div>
       <TodoModal

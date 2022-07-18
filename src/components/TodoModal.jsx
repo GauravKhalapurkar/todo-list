@@ -84,7 +84,7 @@ const TodoModal = ({ heading, openModal, setOpenModal, todo }) => {
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="p-2 text-sm bg-white rounded-md"
+                className="p-2 text-sm text-black-pure bg-white rounded-md"
               />
             </div>
             <div className="flex flex-col py-1">
@@ -96,7 +96,7 @@ const TodoModal = ({ heading, openModal, setOpenModal, todo }) => {
                 id="status"
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="p-2 text-sm bg-white rounded-md"
+                className="p-2 text-sm text-black-pure bg-white rounded-md"
               >
                 <option value="incomplete">Incomplete</option>
                 <option value="complete">Complete</option>
