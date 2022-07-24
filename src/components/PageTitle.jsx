@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-import { updateTitle, setTodoSuccess } from "../slices/todoSlice";
+import { updateTitle } from "../slices/todoSlice";
 
 const PageTitle = () => {
   useEffect(() => {
     const todoTitle = window.localStorage.getItem("todoTitle");
     setHeading(JSON.parse(todoTitle).heading);
+    document.title = JSON.parse(todoTitle).heading;
   }, []);
 
   let [heading, setHeading] = useState("Todo List");
@@ -31,6 +32,7 @@ const PageTitle = () => {
     console.log("esfef: ", JSON.parse(todoTitle).heading);
 
     setHeading(JSON.parse(todoTitle).heading);
+    document.title = JSON.parse(todoTitle).heading;
 
     toast.success("Title updated!");
   };
