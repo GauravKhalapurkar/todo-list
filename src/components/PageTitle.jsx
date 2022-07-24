@@ -11,6 +11,8 @@ const PageTitle = () => {
   }, []);
 
   let [heading, setHeading] = useState("Todo List");
+  let [counter, setCounter] = useState(0);
+  let [counterVisibility, setCounterVisibility] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -19,6 +21,8 @@ const PageTitle = () => {
     console.log(JSON.parse(todoTitle).heading);
 
     setHeading(e.target.value);
+    setCounterVisibility(true);
+    setCounter(e.target.value.length);
   };
 
   const handleBlur = () => {
@@ -34,18 +38,24 @@ const PageTitle = () => {
     setHeading(JSON.parse(todoTitle).heading);
     document.title = JSON.parse(todoTitle).heading;
 
+    setCounterVisibility(false);
+
     toast.success("Title updated!");
   };
 
   return (
-    <div className="w-full text-center font-extrabold text-5xl text-bg-3 py-12">
+    <div className="max-w-[800px] mx-auto text-center py-12">
       <input
         value={heading}
+        maxLength={24}
         onChange={(e) => handleChange(e)}
         onBlur={() => handleBlur()}
-        className=" bg-bg-1 text-center font-extrabold text-5xl  text-bg-3 cursor-pointer "
+        className="w-full bg-bg-1 text-center font-extrabold text-5xl  text-bg-3 cursor-pointer "
         type="text"
       />
+      {counterVisibility && (
+        <p className="text-bg-3 font-bold text-right">{counter}/24</p>
+      )}
     </div>
   );
 };
