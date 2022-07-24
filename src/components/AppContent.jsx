@@ -20,7 +20,7 @@ const AppContent = () => {
   /**overflow-y-auto */
 
   return (
-    <div className="max-w-[800px] mx-auto h-screen ">
+    <div className="max-w-[800px] mx-auto h-full pb-10">
       {filterTodoList.length > 0 ? (
         filterTodoList.map((todo) => <TodoItem key={todo.key} todo={todo} />)
       ) : (
