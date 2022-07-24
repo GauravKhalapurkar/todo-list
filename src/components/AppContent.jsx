@@ -17,8 +17,10 @@ const AppContent = () => {
     return item.status === filterStatus;
   });
 
+  /**overflow-y-auto */
+
   return (
-    <div className="max-w-[800px] mx-auto">
+    <div className="max-w-[800px] mx-auto h-screen">
       {filterTodoList.length > 0 ? (
         filterTodoList.map((todo) => <TodoItem key={todo.key} todo={todo} />)
       ) : (

@@ -8,7 +8,7 @@ import Background from "./components/Background";
 const App = () => {
   return (
     <>
-      <div>
+      <div className="bg-bg-1">
         <Background />
         <PageTitle />
         <Header />

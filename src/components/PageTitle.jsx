@@ -38,12 +38,12 @@ const PageTitle = () => {
   };
 
   return (
-    <div className="w-full text-center font-extrabold text-5xl text-bg-3  py-12">
+    <div className="w-full text-center font-extrabold text-5xl text-bg-3 py-12">
       <input
         value={heading}
         onChange={(e) => handleChange(e)}
         onBlur={() => handleBlur()}
-        className=" bg-bg-1 text-center font-extrabold text-5xl  text-bg-3 cursor-pointer caret-[#00000000] "
+        className=" bg-bg-1 text-center font-extrabold text-5xl  text-bg-3 cursor-pointer "
         type="text"
       />
     </div>
