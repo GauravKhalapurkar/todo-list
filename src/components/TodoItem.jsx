@@ -48,11 +48,7 @@ const TodoItem = ({ todo }) => {
         <div className="flex w-full">
           <CheckBox check={checked} handleCheck={handleCheck} />
           <div className="px-4 flex w-full justify-between">
-            <p
-              className={
-                todo.status === "complete" && "line-through opacity-70"
-              }
-            >
+            <p className={todo.status === "complete" && "line-through "}>
               {todo.title}
             </p>
             <p>{format(new Date(todo.time), "p, dd/MM/yyyy")}</p>
